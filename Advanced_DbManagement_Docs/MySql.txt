@@ -1,0 +1,174 @@
+Recap: Database setup in MySQL Workbench and SQL basics
+Introduction 
+As a database engineer working with massive amounts of data, you need to build a proper database system that meets the data requirements of your business. 
+
+There are multiple database managements systems available for you to use. There are also different developments tools that you can use to create and manage your databases efficiently. 
+
+In this reading, you’ll review some of these systems, including:
+
+MySQL database management system, 
+
+MySQL Workbench development tool,
+
+SQL basics, 
+
+And how to set up your database environment.
+
+This recap will support you in preparing for your exercise tasks.
+
+
+MySQL
+MySQL is an open-source relational database management system. It’s one of the most widely used management systems for building both personal and industry relational databases. 
+
+There are several advantages offered to database engineers who work with MySQL:
+
+Build a secure database system,
+
+Offers high level scalability,
+
+Provides high Performance,
+
+24 hours x 7 days a week uptime with cluster servers,
+
+Supports robust transactional database engines,
+
+Complete Workflow Control,
+
+Reduced cost,
+
+And facilitates easy to use and efficient database management.
+
+
+MySQL Workbench
+MySQL Workbench is a unified visual tool for database modeling and database management. It was developed by Oracle, the company that manages MySQL. 
+
+MySQL Workbench is also free, open-source and cross-platform tool that runs on Windows, Mac and Linux. MySQL Workbench enables you to speed up the database design and development process. 
+
+Key features of MySQL Workbench include the following:
+
+Simplify database design and maintenance. 
+
+Document data requirements in the form of visualized ER diagrams. 
+
+Support model-driven database development.
+
+Automate the development process without the need for much coding. 
+
+Design data models that meet the expected standards. 
+
+Provide capabilities for creating data models in the visual designer. 
+
+Use the Forward and the Reverse Engineer methods to create data models and databases.
+
+Maintain different versions of database schemas.
+
+Support schema synchronization and comparison functionality.
+
+Use the DBDoc documentation tool to document all details of your database design. 
+
+Facilitate visual SQL editor for easy use to write, run and debug SQL statements. 
+
+Provide complete administrative control over all aspects of MySQL server. 
+
+Import and export mysqldump files, and export query results sets as CSV, XML and HTML files. 
+
+
+Installing MySQL Workbench
+MySQL Workbench is open source and cross platform system available for Windows, Linux, and macOS.
+
+Installing MySQL Workbench with MySQL server is a straightforward process. MySQL Workbench downloads are available at the MySQL website: 
+https://dev.mysql.com/downloads/workbench/
+
+For more details about the installation instructions, you can review the Installing MySQL Workbench item in the Advanced Data Modeling course.
+
+Oracle provides detailed instructions about the MySQL Workbench installation process in the following link: 
+https://dev.mysql.com/doc/refman/8.0/en/installing.html
+
+
+SQL Basics
+SQL (Structured Query Language) is the standard query language for accessing and manipulating relational databases. SQL provides four categories of commands to create, manipulate and manage data in a database known as DDL, DML, DCL and TCL.
+
+Data Definition Language (DDL) commands are used to define and modify tables in a database such as Create, Drop, Alter and Truncate commands. 
+
+Data Manipulation Language (DML) commands are used to query, delete and update data in the database such as select, insert, update and delete commands.
+
+Data Control Language (DCL) commands are used to control the roles and privileges of users of a database system such as Grant and Revoke commands.
+
+Transaction Control Language (TCL) to manage transactions in the database such as Commit and Rollback Commands.
+
+If you want to learn more about each category of commands and how to use them, you can review 
+Common SQL Commands
+ item in the ‘Introduction to database’ course.
+
+
+Database setup
+There are few issues you need to consider when setting up MySQL Workbench to create and manage your databases. 
+
+Create a new user. This is the most secure way to connect to your MySQL database, as you can manage user roles and privileges.
+
+Create an instance of a MySQL server. This can be done in the MySQL Workbench home screen. In the home-screen side panel, you can select MySQL Connections option to view or create instances of MySQL. 
+
+Use connections option to load, configure, group and view information about each of your MySQL connections. You can select “Users and Privileges” under the “Management” menu to view a list of current database users.
+
+Use your MySQL connection to begin working with database schemas and SQL queries.
+
+
+In MySQL Workbench, you can create your database in different ways. For example, you can create and use your database by writing the relevant SQL statements. 
+
+Alternatively, you can create a data model in the model designer first, then transform it into a SQL schema that can be executed and implemented directly in a MySQL server without typing any SQL code. 
+
+To learn more about this process, you can review the 
+Database modeling in MySQL Workbench
+ item in the Advanced data modeling course.
+
+
+Conclusion 
+In this reading you learned about the various categories of SQL commands, MySQL database management system and MySQL Workbench. You are now ready to start developing your database system and complete the different tasks in this lesson.
+
+Exercise: Set up the MySQL instance server in MySQL Workbench
+Scenario 
+Little Lemon needs to build a robust relational database system in MySQL to store large amounts of data which they can also easily manage and locate as required. Little Lemon have decided to use MySQL Workbench to develop their new database system. They need you to help them set up their MySQL environment to prepare for the design and development of their database. 
+
+
+Prerequisites 
+MySQL Workbench must already be downloaded and installed on your machine. 
+
+
+Task Instructions
+Complete the following tasks to help Little Lemon set up their MySQL environment. 
+
+
+Task 1
+Creating a new user is the most secure way to connect to your MySQL database. In this first task, you need to use MySQL Workbench to create a new user account. 
+
+Here is some guidance for completing this task:
+
+Log in to the MySQL Server using the root user.
+
+Select Administration tab from the Navigator section.
+
+Select Add account. 
+
+Provide a meaningful username and a strong password.
+
+Grant the new user the right to perform all tasks. 
+
+
+Task 2
+To prepare for building and managing your database, you need to be connected to a MySQL server. In this task you need to create a new MySQL connection. 
+
+Here is some guidance for completing this task:
+
+In the MySQL Workbench home screen, select MySQL connection tab. 
+
+Select the plus icon to open the Setup New Connection form. 
+
+Fill in the form to create a new server instance. 
+
+Click the Test Connection button to check that the settings work as required. 
+
+Once you have completed this task, you can use this connection to begin working with database schemas and SQL queries.
+
+
+Conclusion
+In this exercise, you created a new user account and an instance server. You are now ready to develop a suitable database system for Little Lemon.

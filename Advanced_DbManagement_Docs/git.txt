@@ -1,0 +1,52 @@
+Instructions
+1. Navigate to your GitHub account and add a new repository. 
+
+Screenshot of new repository menu
+Taken from: 
+https://docs.github.com/en/get-started/quickstart/create-a-repo#create-a-repository
+
+
+2. Name the new project db-capstone-project 
+
+
+3. Click Create repository 
+
+Screenshot of create repository butto
+Taken from: 
+https://docs.github.com/en/get-started/quickstart/create-a-repo#create-a-repository
+
+
+4. Select the code icon in the repo and copy the HTTPS address. 
+
+Screenshot of code butto
+
+5. Navigate to a local directory on your machine that you wish to store the project at. 
+
+6. Initialize the repo using the following code:
+
+git init
+
+7. Create a readme.md file and write the message "setting up repository for project" 
+
+8. To add files to the repo type:
+
+git add readme.md
+
+
+9. Commit the changes with a meaningful message, such as: 
+
+git commit -m "adding project readme" 
+
+10. Next, point the directory toward your git repository by using the git remote add command along with the destination URL from step 4.
+
+git remote add origin <REMOTE_URL>
+
+11. Verify the remote URL:
+
+git remote -v
+
+12. Push your repository.
+
+git push -u origin master
+
+You will be prompted to enter your GitHub details. Finally check your GitHub account to ensure the update of the readme file.

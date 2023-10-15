@@ -1,0 +1,59 @@
+Exercise: Committing the project
+Scenario
+At this stage of the course, you have created a database model with the name LittleLemonDM. You have also developed a database with the name LittleLemonDB and exported the SQL file.
+
+In this exercise, you’ll take the next step and commit the project to the remote repository on GitHub.
+
+
+Prerequisites
+You should have already cloned the GitHub repository to a local repository named db-capstone-project in your machine's workspace directory. 
+
+
+Task instructions
+Complete the following tasks to commit your project to Git. 
+
+Task 1
+In this first task, you need to create a new branch and commit the changes. Here are a few steps that you can follow. 
+
+Step 1: Create a new branch on your local repository
+Open the terminal and use the command $ git checkout –B command <branch-name> to create a new git branch.
+
+Step 2: add the project folder to the stage
+In the Git terminal, enter the command $ git add. 
+
+Step 3: check the status
+In the Git terminal, enter the command $ git status. This will display a list of details about the commit.
+
+Step 4: commit the changes
+The Git command for this action is $ git commit –m "message"
+
+
+Task 2
+After completing the first task, you should carry out the following steps to push and pull the changes to GitHub.
+
+Step 1: Push the changes to the GitHub repository
+Use the command $ git push –u origin <branch-name>
+
+Step 2: Login to GitHub and open the repository
+The repository page should display the Compare & pull request button. Go ahead and press it. 
+
+Screenshot of compare & pull request button
+Step 3: Create pull request
+On the repository page, you’ll see the changes committed, and the Create & pull request button.
+
+Screenshot of create pull request button
+Step 4: Merge pull request
+Review the changes and confirm by pressing the Merge pull request button.
+
+Screenshot of merge request button
+Task 3
+After you complete the second task, you need to update the main branch by completing the following steps:
+
+Step 1: Login to the main branch of local repository
+Go back to the Git terminal and enter the command $ git checkout main
+
+Step 2: Update the main branch
+Use the $ git pull command.
+
+Conclusion
+In this exercise, you practiced the steps for pushing the Little Lemon database project files to the GitHub repository.
