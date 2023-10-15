@@ -1,0 +1,123 @@
+Meta Database Engineer - 6
+Database Clients Course
+Week - 4
+
+Little Lemon analysis and sales report
+You have gained all the necessary skills and knowledge required to interact with the back-end MySQL database from your Python-based front-end application via the standard database client MySQL Connector/Python. 
+
+Follow the instructions in the exercises given below and create a Jupyter notebook to produce a Little Lemon analysis and sales report. You need to submit this report for your peers to review.
+
+ 
+
+Task 1:
+Complete the following steps to establish a connection pool:
+
+To create a connection pool, import MySQLConnectionPool class from MySQL Connector/Python.
+
+To find the information on the error, import the Error class from MySQL Connector/Python.
+
+Define your database configurations as a Python dictionary object called dbconfig.
+
+Establish a connection pool [pool_name = pool_b] with two connections. 
+
+Implement error handling using a try-except block in case the connection fails. 
+
+ 
+
+Task 2:
+Three guests are trying to book dinner slots simultaneously. Get the connections from pool_b and insert the following data in the Bookings table:
+
+
+TIP: You need to add a connection to connect the third guest.
+
+
+Guest 1:
+
+Table Number: 8
+
+First Name: Anees
+
+Last Name: Java
+
+Booking Time: 18:00
+
+EmployeeID: 6
+
+
+Guest 2:
+
+Table Number: 5
+
+First Name: Bald
+
+Last Name: Vin
+
+Booking Time: 19:00
+
+EmployeeID: 6
+
+
+Guest 3:
+
+Table Number: 12
+
+First Name: Jay
+
+Last Name: Kon
+
+Booking Time: 19:30 
+
+EmployeeID: 6
+
+
+Return all the connections back to the pool. 
+
+
+TIP: The pool size is two. However, you have three connected users. You can only return two connections. Returning a third connection will raise a PoolError. Use try-except to print the error message.  
+
+
+Task 3:
+Create a report containing the following information:
+
+The name and EmployeeID of the Little Lemon manager.
+
+The name and role of the employee who receives the highest salary.
+
+The number of guests booked between 18:00 and 20:00.
+
+The full name and BookingID of all guests waiting to be seated with the receptionist in sorted order with respect to their BookingSlot.
+
+ 
+
+Task 4:
+Create a stored procedure named BasicSalesReport that returns the following statistics: 
+
+Total sales
+
+Average sale
+
+Minimum bill paid
+
+Maximum bill paid
+
+ 
+
+Task 5:
+Little Lemon needs to display the next three upcoming bookings from the Bookings table on the kitchen screen to notify their chefs which orders are due next. To complete this task, carry out the following steps:
+
+Get a connection from the pool.
+
+Create a buffered cursor.
+
+Combine the data from the Bookings and the Employee tables. Sort the retrieved records in ascending order. Then display the information of the first three guests. 
+
+Returned the connection back to the pool.
+
+
+The output should be as follows:
+
+[BookingSlot]
+
+[Guest_name]
+
+[Assigned to: Employee Name [Employee Role]]
