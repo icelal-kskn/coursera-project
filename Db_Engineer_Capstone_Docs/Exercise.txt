@@ -1,0 +1,360 @@
+Exercise: Create a virtual table to summarize data
+Scenario
+Little Lemon needs to retrieve data from their database. You can use your knowledge of MySQL to help them. As part of this task, you need to:
+
+Create a virtual table to summarize data.
+
+Use a JOIN statement to query data from multiple tables.
+
+Create a SQL statement with a subquery.
+
+You can carry out these steps using your knowledge of virtual tables, JOIN statements and SQL queries. Review the instructions that follow for guidance on completing these tasks.
+
+
+Prerequisites
+In the previous module, you developed a data model for Little Lemon and implemented it in your MySQL server. Your database should now contain several tables including the following:
+
+Menus, 
+
+Orders, 
+
+MenuItems,
+
+and Customers.
+
+These tables might have a different name within your database. However, they should still contain similar data to, and resemble the relationships in, the following diagram:
+
+Diagram of data and relationships
+You also need to use MySQL Workbench SQL editor to write the required subquery, virtual table and JOIN statements.
+
+
+Task instructions
+Little Lemon need you to create some reports on the orders placed in the restaurant. Complete the following tasks to help Little Lemon obtain the relevant information about the menu’s orders.
+
+
+Task 1
+In the first task, Little Lemon need you to create a virtual table called OrdersView that focuses on OrderID, Quantity and Cost columns within the Orders table for all orders with a quantity greater than 2. 
+
+Here’s some guidance around completing this task: 
+
+Use a CREATE VIEW statement.
+
+Extract the order id, quantity and cost data from the Orders table.
+
+Filter data from the orders table based on orders with a quantity greater than 2. 
+
+You can query the OrdersView table using the following syntax:
+
+
+Select * from OrdersView;
+
+
+Task 2
+For your second task, Little Lemon need information from four tables on all customers with orders that cost more than $150. Extract the required information from each of the following tables by using the relevant JOIN clause: 
+
+Customers table: The customer id and full name.
+
+Orders table: The order id and cost.
+
+Menus table: The menus name.
+
+MenusItems table: course name and starter name.
+
+The result set should be sorted by the lowest cost amount.
+
+
+
+Task 3
+For the third and final task, Little Lemon need you to find all menu items for which more than 2 orders have been placed. You can carry out this task by creating a subquery that lists the menu names from the menus table for any order quantity with more than 2.
+
+Here’s some guidance around completing this task: 
+
+Use the ANY operator in a subquery
+
+The outer query should be used to select the menu name from the menus table.
+
+The inner query should check if any item quantity in the order table is more than 2. 
+
+
+
+Conclusion
+In this exercise you helped Little Lemon to create reports using your knowledge of virtual tables, JOIN statements and SQL queries.
+
+CODE
+ 
+Task 1
+CREATE VIEW OrdersView AS
+SELECT OrderID, Quantity, Cost
+FROM Orders
+WHERE Quantity > 2;
+
+Task 2
+
+SELECT Customers.CustomerID, Customers.FullName, Orders.OrderID, Orders.Cost, Menus.MenuName, MenuItems.CourseName, MenuItems.StarterName
+FROM Customers
+INNER JOIN Orders ON Customers.CustomerID = Orders.CustomerID
+INNER JOIN MenuItems ON Orders.MenuItemID = MenuItems.MenuItemID
+INNER JOIN Menus ON MenuItems.MenuID = Menus.MenuID
+WHERE Orders.Cost > 150
+ORDER BY Orders.Cost;
+
+
+Task 3
+
+SELECT MenuName
+FROM Menus
+WHERE MenuID IN (
+    SELECT DISTINCT MenuItems.MenuID
+    FROM Orders
+    INNER JOIN MenuItems ON Orders.MenuItemID = MenuItems.MenuItemID
+    GROUP BY MenuItems.MenuID
+    HAVING COUNT(Orders.OrderID) > 2
+);
+
+
+
+Exercise: Create optimized queries to manage and analyze data
+Scenario 
+Little Lemon need to query the data in their database. To do this, they need your help with creating optimized queries using stored procedures and prepared statements.
+
+
+Prerequisites
+In the previous module, you developed a data model for Little Lemon and implemented it in your MySQL server. Your database should now contain several tables including the following:
+
+Menus, 
+
+Orders, 
+
+MenuItems,
+
+and Customers.
+
+These tables might have different names within your database. However, they should still contain similar data to, and resemble the relationships in, the following diagram:
+
+Diagram of data and relationships
+
+
+
+Task 1
+In this first task, Little Lemon need you to create a procedure that displays the maximum ordered quantity in the Orders table. 
+
+Creating this procedure will allow Little Lemon to reuse the logic implemented in the procedure easily without retyping the same code over again and again to check the maximum quantity. 
+
+You can call the procedure GetMaxQuantity and invoke it as follows:
+
+CALL GetMaxQuantity();
+
+
+
+Task 2
+In the second task, Little Lemon need you to help them to create a prepared statement called GetOrderDetail. This prepared statement will help to reduce the parsing time of queries. It will also help to secure the database from SQL injections.
+
+The prepared statement should accept one input argument, the CustomerID value, from a variable. 
+
+The statement should return the order id, the quantity and the order cost from the Orders table. 
+
+Once you create the prepared statement, you can create a variable called id and assign it value of 1. 
+
+Then execute the GetOrderDetail prepared statement using the following syntax:
+
+
+SET @id = 1;
+EXECUTE GetOrderDetail USING @id;
+Output result of query
+
+Task 3
+Your third and final task is to create a stored procedure called CancelOrder. Little Lemon want to use this stored procedure to delete an order record based on the user input of the order id.
+
+Creating this procedure will allow Little Lemon to cancel any order by specifying the order id value in the procedure parameter without typing the entire SQL delete statement.   
+
+
+
+Conclusion
+In this exercise, you helped Little Lemon to query the data in their database by creating optimized queries using stored procedures and prepared statements.
+
+CODE
+
+Task 1
+
+DELIMITER //
+
+CREATE PROCEDURE GetMaxQuantity()
+BEGIN
+    SELECT MAX(Quantity) AS MaximumOrderedQuantity FROM Orders;
+END//
+
+DELIMITER ;
+
+CALL GetMaxQuantity();
+
+Task 2
+
+DELIMITER //
+
+CREATE PROCEDURE GetOrderDetail(IN customerId INT)
+BEGIN
+    SET @query = 'SELECT OrderID, Quantity, Cost FROM Orders WHERE CustomerID = ?';
+    PREPARE statement FROM @query;
+    EXECUTE statement USING customerId;
+    DEALLOCATE PREPARE statement;
+END//
+
+DELIMITER ;
+
+SET @id = 1;
+CALL GetOrderDetail(@id);
+
+Task 3
+
+DELIMITER //
+
+CREATE PROCEDURE CancelOrder(IN orderId INT)
+BEGIN
+    DELETE FROM Orders WHERE OrderID = orderId;
+END//
+
+DELIMITER ;
+
+CALL CancelOrder(orderId);
+
+
+
+Exercise: Add query functions
+Scenario 
+Little Lemon have started building a functional booking system from which they can manage their customer data. An integral part of a well-functioning system is the ability to query data. Little Lemon need you to help them add the search functionality required to query their data. 
+
+
+Prerequisites
+At this stage of the project, you should have set up the working environment, configured the connector/python and created a database with all the customer information. To implement a booking system, you will first have to review how to make queries on an existing database using Python syntax.
+
+
+Task One
+In the previous exercise you created a Python environment. In the first task of this exercise, you are tasked with extending the environment to connect with your database and interact with the data it holds. 
+
+Your first step is to import the connector module, enter your user details and connect with the database (Hint: you can use an alias when importing the module).
+
+This gives you access to all the functionality available from the connector API, which can be accessed through the variable named connector (or whichever alias you choose). 
+
+To connect with your database, you can call the connect method of the connector class and pass in your details using the following code: 
+
+1
+connection = connector.connect(user = "your_username", password = "your_password", db = "database_name") 
+
+This code should look very familiar to you from the previous course, apart from the parameter db. DB stands for database. When instantiating the connection, you can pass the database name here in place of calling the USE command later. 
+
+The final step is to instantiate an instance of cursor to pass queries and return results (Hint: the cursor is part of the connection class outlined above).
+
+
+Task two
+In this second task, you now need to query the database to show all tables within the database. 
+
+Having established a connection in the first task, you need to execute a test query to ensure that there are no issues. You can do this by executing, or passing, a generic query that returns a snapshot of the database tables. 
+
+You need to execute the query on the cursor using the code that follows. The cursor, as you should recall, is the bridge through which you can pass queries and return results. 
+
+12
+show_tables_query = "SHOW tables" 
+cursor.execute(show_tables_query)
+
+As before, a variable is used to hold the query. To gain a general insight, the query asks to display all tables within the database. 
+
+The second line calls the cursor execute method. This method takes the Python string and ports it into a viable SQL statement. It then passes it to the database and returns the result. 
+
+To view the results of your query, you can create another variable called results (Hint: the cursor has a method that can return all results in one call). 
+
+To view the tables that are associated with a database, you can print out the results variable using the following code: 
+
+1
+print(results)
+
+Task 3
+Query with table JOIN
+
+For the third and final task, Little Lemon need you to return specific details from your database. They require the full name and contact details for every customer that has placed an order greater than $60 for a promotional campaign. 
+
+You can use the following steps to implement this functionality in your database directory:
+
+
+Step One: Identify which tables are required. To complete the query, you first need to identify which table has the required data. 
+
+The bill paid can be found in Orders as TotalCost and the customer contact information can be found in the Customers table. 
+
+When selecting attributes from a specific table, specify the table name, followed by a dot and the target attribute as below (Hint: select the column attributes that you will need). 
+
+
+Step Two: Next, specify a table (Hint: The FROM keyword allows you to identify a table.)
+
+To join two tables, specify the type of JOIN and the attribute to join the table on. The tables must be joined on an attribute that is common to both tables (such as a common column).
+
+
+Step Three: Finally, include a clause to filter the data on. (Hint: the WHERE clause can be used to add conditional parameters.) 
+
+When you have completed these steps, wrap this query as a string and pass it to the .execute() method of the cursor class. When executed, your SELECT query must extract the full name, contact details and bill amount for every customer who spent more than $60.
+
+
+Conclusion
+In this exercise you reviewed the mechanisms for performing queries using Python.
+
+CODE
+
+Task 1
+
+import mysql.connector
+
+# Define your database connection details
+db_config = {
+    "user": "your_username",
+    "password": "your_password",
+    "host": "localhost",  # Change this to your database host if it's not on the local machine
+    "database": "database_name",
+}
+
+# Establish a connection to the database
+connection = mysql.connector.connect(**db_config)
+
+# Create a cursor to execute queries
+cursor = connection.cursor()
+
+# Now you have a connection and cursor ready to interact with the database
+
+Task 2
+
+show_tables_query = "SHOW TABLES"
+cursor.execute(show_tables_query)
+
+# Fetch all the results as a list
+tables = cursor.fetchall()
+
+# Print the list of tables
+for table in tables:
+    print(table)
+
+Task 3
+
+# Define the SQL query with a JOIN and a WHERE clause
+query = """
+SELECT Customers.FullName, Customers.ContactDetails, Orders.TotalCost
+FROM Customers
+INNER JOIN Orders ON Customers.CustomerID = Orders.CustomerID
+WHERE Orders.TotalCost > 60;
+"""
+
+# Execute the query
+cursor.execute(query)
+
+# Fetch all the results
+results = cursor.fetchall()
+
+# Print the results
+for result in results:
+    print(result)
+
+
+
+
+
+
+
+
+
+
