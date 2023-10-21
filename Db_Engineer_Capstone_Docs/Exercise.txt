@@ -80,39 +80,6 @@ The inner query should check if any item quantity in the order table is more tha
 Conclusion
 In this exercise you helped Little Lemon to create reports using your knowledge of virtual tables, JOIN statements and SQL queries.
 
-CODE
- 
-Task 1
-CREATE VIEW OrdersView AS
-SELECT OrderID, Quantity, Cost
-FROM Orders
-WHERE Quantity > 2;
-
-Task 2
-
-SELECT Customers.CustomerID, Customers.FullName, Orders.OrderID, Orders.Cost, Menus.MenuName, MenuItems.CourseName, MenuItems.StarterName
-FROM Customers
-INNER JOIN Orders ON Customers.CustomerID = Orders.CustomerID
-INNER JOIN MenuItems ON Orders.MenuItemID = MenuItems.MenuItemID
-INNER JOIN Menus ON MenuItems.MenuID = Menus.MenuID
-WHERE Orders.Cost > 150
-ORDER BY Orders.Cost;
-
-
-Task 3
-
-SELECT MenuName
-FROM Menus
-WHERE MenuID IN (
-    SELECT DISTINCT MenuItems.MenuID
-    FROM Orders
-    INNER JOIN MenuItems ON Orders.MenuItemID = MenuItems.MenuItemID
-    GROUP BY MenuItems.MenuID
-    HAVING COUNT(Orders.OrderID) > 2
-);
-
-
-
 Exercise: Create optimized queries to manage and analyze data
 Scenario 
 Little Lemon need to query the data in their database. To do this, they need your help with creating optimized queries using stored procedures and prepared statements.
@@ -172,50 +139,7 @@ Creating this procedure will allow Little Lemon to cancel any order by specifyin
 Conclusion
 In this exercise, you helped Little Lemon to query the data in their database by creating optimized queries using stored procedures and prepared statements.
 
-CODE
 
-Task 1
-
-DELIMITER //
-
-CREATE PROCEDURE GetMaxQuantity()
-BEGIN
-    SELECT MAX(Quantity) AS MaximumOrderedQuantity FROM Orders;
-END//
-
-DELIMITER ;
-
-CALL GetMaxQuantity();
-
-Task 2
-
-DELIMITER //
-
-CREATE PROCEDURE GetOrderDetail(IN customerId INT)
-BEGIN
-    SET @query = 'SELECT OrderID, Quantity, Cost FROM Orders WHERE CustomerID = ?';
-    PREPARE statement FROM @query;
-    EXECUTE statement USING customerId;
-    DEALLOCATE PREPARE statement;
-END//
-
-DELIMITER ;
-
-SET @id = 1;
-CALL GetOrderDetail(@id);
-
-Task 3
-
-DELIMITER //
-
-CREATE PROCEDURE CancelOrder(IN orderId INT)
-BEGIN
-    DELETE FROM Orders WHERE OrderID = orderId;
-END//
-
-DELIMITER ;
-
-CALL CancelOrder(orderId);
 
 
 
@@ -295,59 +219,7 @@ When you have completed these steps, wrap this query as a string and pass it to 
 Conclusion
 In this exercise you reviewed the mechanisms for performing queries using Python.
 
-CODE
 
-Task 1
-
-import mysql.connector
-
-# Define your database connection details
-db_config = {
-    "user": "your_username",
-    "password": "your_password",
-    "host": "localhost",  # Change this to your database host if it's not on the local machine
-    "database": "database_name",
-}
-
-# Establish a connection to the database
-connection = mysql.connector.connect(**db_config)
-
-# Create a cursor to execute queries
-cursor = connection.cursor()
-
-# Now you have a connection and cursor ready to interact with the database
-
-Task 2
-
-show_tables_query = "SHOW TABLES"
-cursor.execute(show_tables_query)
-
-# Fetch all the results as a list
-tables = cursor.fetchall()
-
-# Print the list of tables
-for table in tables:
-    print(table)
-
-Task 3
-
-# Define the SQL query with a JOIN and a WHERE clause
-query = """
-SELECT Customers.FullName, Customers.ContactDetails, Orders.TotalCost
-FROM Customers
-INNER JOIN Orders ON Customers.CustomerID = Orders.CustomerID
-WHERE Orders.TotalCost > 60;
-"""
-
-# Execute the query
-cursor.execute(query)
-
-# Fetch all the results
-results = cursor.fetchall()
-
-# Print the results
-for result in results:
-    print(result)
 
 
 

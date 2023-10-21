@@ -1,0 +1,8 @@
+CREATE DEFINER=`user00`@`%` FUNCTION `Validate`(RecordsFound INT, message VARCHAR(255)) RETURNS int
+    DETERMINISTIC
+BEGIN
+IF RecordsFound IS NOT NULL OR RecordsFound > 0 THEN 
+	SIGNAL SQLSTATE 'ERROR' SET MESSAGE_TEXT = message;
+    END IF;
+RETURN RecordsFound;
+END
