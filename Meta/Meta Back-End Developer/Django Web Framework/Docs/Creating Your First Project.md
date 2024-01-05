@@ -34,7 +34,7 @@ pip3 install virtualenv
 **Step 2:**  Now add the command inside the command shell:
 
 ```
-~/.local/bin/virtualenv django-venv
+virtualenv django-venv
 ```
 
 
